@@ -1,6 +1,8 @@
-import { readdir, readFile } from "fs/promises";
+"use server";
 import path from "path";
+import { readdir, readFile } from "fs/promises";
 import { Hook } from "@lib/definitions";
+import { loadEnv } from "@lib/env";
 
 export async function loadHooks(term: string = "") {
   try {
@@ -49,4 +51,8 @@ export async function getHookCode(hookName: string) {
   } catch (error) {
     console.log("Error getting hook code");
   }
+}
+
+export async function state() {
+  console.log(loadEnv());
 }

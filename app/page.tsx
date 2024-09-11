@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 
-import { getHookCode } from "@lib/data";
 import {
   Contrib,
   Footer,
@@ -20,8 +19,8 @@ export default async function Page({
   };
 }) {
   const { page = 1, q = "" } = searchParams || {};
+  // Alternatively, if this action is tied to a page route:
 
-  const dirInfo = await getHookCode("useDebounce");
   return (
     <>
       <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-teal-900 text-white">

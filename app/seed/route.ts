@@ -1,17 +1,39 @@
-import { writeFile } from "fs/promises";
 import path from "path";
+import { writeFile } from "fs/promises";
 import { NextRequest, NextResponse } from "next/server";
+
 import Groq from "groq-sdk";
+
+import { loadEnv } from "@lib/env";
 import { validateHooksArray } from "@lib/validations";
 import { Hooks } from "@lib/definitions";
-import { loadEnv } from "@lib/utils";
+import { isEnv } from "@lib/utils";
 
 export async function GET(req: NextRequest) {
-  const env = loadEnv();
-  if (typeof env.GROQ_API_KEY !== "string") {
+  // This action is only allowed in dev environments
+  if (!isEnv().isDevelopment()) {
     return NextResponse.json(
-      { error: env },
-      { status: 400, statusText: "Missing GROQ_API_KEY" }
+      { err: "Not allowed to perform this action" },
+      { status: 401 }
+    );
+  }
+
+  // Check for the authorization SEED_SECRET
+  const auth = req.headers.get("Authorization");
+
+  const env = loadEnv();
+  // Check for env errors
+  if (
+    typeof env.GROQ_API_KEY !== "string" ||
+    typeof env.SEED_SECRET !== "string"
+  ) {
+    return NextResponse.json(env, { status: 400 });
+  }
+
+  if (!auth || auth !== env.SEED_SECRET) {
+    return NextResponse.json(
+      { err: "Not allowed to perform this action" },
+      { status: 401 }
     );
   }
 
