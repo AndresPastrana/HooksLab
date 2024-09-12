@@ -4,35 +4,7 @@
     "description": "Debounce rapidly changing values"
   },
   {
-    "name": "useThrottle",
-    "description": "Throttle repeatedly called functions"
-  },
-  {
-    "name": "useMemoize",
-    "description": "Cache expensive function results"
-  },
-  {
-    "name": "useAsync",
-    "description": "Async operations with retry and cancellability"
-  },
-  {
-    "name": "useTimeout",
-    "description": "Create timeouts with cancellability"
-  },
-  {
-    "name": "useInterval",
-    "description": "Create intervals with cancellability"
-  },
-  {
-    "name": "useHttp",
-    "description": "Make HTTP requests with caching and error handling"
-  },
-  {
-    "name": "useCache",
-    "description": "Cache and memoize data"
-  },
-  {
-    "name": "useSWR",
-    "description": "React Hook for data fetching with caching and revalidation"
+    "name": "useDebounceCallback",
+    "description": "Debounce a fucntion exectution"
   }
 ]

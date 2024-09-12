@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.4",
+    "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@tailwindcss/forms": "^0.5.7",
     "@vercel/postgres": "^0.8.0",
@@ -21,6 +22,7 @@
     "postcss": "8.4.38",
     "react": "19.0.0-rc-f38c22b244-20240704",
     "react-dom": "19.0.0-rc-f38c22b244-20240704",
+    "react-syntax-highlighter": "^15.5.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss": "3.4.4",
     "tailwindcss-animate": "^1.0.7",
@@ -32,7 +34,8 @@
     "@types/bcrypt": "^5.0.2",
     "@types/node": "20.14.8",
     "@types/react": "18.3.3",
-    "@types/react-dom": "18.3.0"
+    "@types/react-dom": "18.3.0",
+    "@types/react-syntax-highlighter": "^15.5.13"
   },
   "engines": {
     "node": ">=20.12.0"

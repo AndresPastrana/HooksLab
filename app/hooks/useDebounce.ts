@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-// Type definition for the debounce hook
-type DebounceValue<T> = T | (() => T);
 
 function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);

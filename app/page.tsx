@@ -9,6 +9,7 @@ import {
   SearchResultsWrapper,
 } from "@ui/home";
 import { SearchResultsSkeleton } from "@ui/skeletons";
+import ShowActiveHook from "@ui/home/modal/ShowActiveHook";
 
 export default async function Page({
   searchParams,
@@ -47,8 +48,8 @@ export default async function Page({
 
         {/* Footer */}
         <Footer />
-        {/* Dialog */}
       </div>
+      <ShowActiveHook />
     </>
   );
 }

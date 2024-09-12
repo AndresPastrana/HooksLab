@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
-import { Hook } from "@lib/definitions";
-import { Code, Star, GitFork } from "lucide-react";
-import { getHookCode, loadHooks } from "@lib/data";
+import { Star, GitFork } from "lucide-react";
+
+import { loadHooks } from "@lib/data";
 import {
   Card,
   CardContent,
@@ -10,12 +10,10 @@ import {
   CardTitle,
 } from "@ui/shared/card";
 import { Button } from "@ui/shared/button";
+import { ViewCode } from "@/app/ui/home/ViewCode";
+import { Hook } from "@lib/definitions";
 
 const ResultItem = ({ hook }: { hook: Hook }) => {
-  const handleLoadHookCode = async () => {
-    const code = await getHookCode(hook.name);
-    alert(code);
-  };
   return (
     <Card
       key={hook.name + hook.description}
@@ -28,14 +26,7 @@ const ResultItem = ({ hook }: { hook: Hook }) => {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex justify-between items-center">
-        <Button
-          variant="ghost"
-          className="text-purple-400 hover:text-purple-300 hover:bg-purple-900/50"
-          // onClick={() => setSelectedHook(hook)}
-        >
-          <Code className="mr-2 h-4 w-4" />
-          View Code
-        </Button>
+        <ViewCode hookName={hook.name} />
         <div className="flex space-x-2">
           <Button
             variant="ghost"
