@@ -30,7 +30,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(env, { status: 400 });
   }
 
-  if (!auth || auth !== env.SEED_SECRET) {
+  const auth_key = auth?.split("Bearer ")[1];
+
+  if (!auth || auth_key !== env.SEED_SECRET) {
     return NextResponse.json(
       { err: "Not allowed to perform this action" },
       { status: 401 }

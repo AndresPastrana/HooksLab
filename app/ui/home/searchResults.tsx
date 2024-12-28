@@ -26,7 +26,7 @@ const ResultItem = ({ hook }: { hook: Hook }) => {
         </CardDescription>
       </CardHeader>
       <CardContent className="flex justify-between items-center">
-        <ViewCode hookName={hook.name} />
+        <ViewCode name={hook.name} desc={hook.description} />
         <div className="flex space-x-2">
           <Button
             variant="ghost"

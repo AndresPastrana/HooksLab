@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ActiveHookContext } from "../context/ActiveHookContext";
 // Custom hook to inject and modify the active hook in any client component
 export const useActiveHook = () => {

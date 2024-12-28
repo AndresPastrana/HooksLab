@@ -4,7 +4,47 @@
     "description": "Debounce rapidly changing values"
   },
   {
-    "name": "useDebounceCallback",
-    "description": "Debounce a fucntion exectution"
+    "name": "useDidMount",
+    "description": "Call a function after component mounts"
+  },
+  {
+    "name": "useIsMounted",
+    "description": "Check if the component is still mounted"
+  },
+  {
+    "name": "useCallback",
+    "description": "Memoize a function to prevent unnecessary re-renders"
+  },
+  {
+    "name": "useMemo",
+    "description": "Memoize a value to prevent unnecessary re-renders"
+  },
+  {
+    "name": "useRef",
+    "description": "Create a reference to a DOM node or parent component"
+  },
+  {
+    "name": "useImperativeHandle",
+    "description": "Exposes a value to parent components"
+  },
+  {
+    "name": "useLayoutEffect",
+    "description": "Similar to useEffect, but fires after layout changes"
+  },
+  {
+    "name": "useState",
+    "description": "Add state to functional components"
+  },
+  {
+    "name": "useEffect",
+    "description": "Add side-effects to functional components"
+  },
+  {
+    "name": "useContext",
+    "description": "Read context (e.g., theme, data) in functional components"
+  },
+  {
+    "name": "useReducer",
+    "description": "Manage state with a reducer function"
   }
 ]
