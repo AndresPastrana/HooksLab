@@ -6,6 +6,7 @@ export function loadEnv(): Env | EnvError {
   const env: Partial<Env> = {
     GROQ_API_KEY: process.env.GROQ_API_KEY || undefined,
     SEED_SECRET: process.env.SEED_SECRET || undefined,
+    HOST_URL: process.env.NEXT_PUBLIC_HOST_URL || undefined,
   };
 
   // Validate the environment values

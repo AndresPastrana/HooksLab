@@ -8,11 +8,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@ui/shared/dialog";
-import { Check, Copy } from "lucide-react";
+import { Copy } from "lucide-react";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useActiveHook, useFetch } from "@/app/hooks/app.hooks";
 import { Description } from "@/app/ui/home/modal/Description";
 import { ActiveHook } from "@/app/context/ActiveHookContext";
+import { isEnv } from "@/app/lib/utils";
 
 const BtnCopyCode = ({ text }: { text: string }) => {
   const { active } = useActiveHook();
@@ -29,7 +30,7 @@ const BtnCopyCode = ({ text }: { text: string }) => {
 };
 
 const ModalHeader = () => {
-  const { active, setActiveHook } = useActiveHook();
+  const { active } = useActiveHook();
 
   return (
     <DialogHeader>
@@ -46,11 +47,16 @@ const ModalContent = () => {
   if (!active) {
     return null;
   }
-  console.log("Rendering");
 
-  const { data, error, loading } = useFetch<{ code: string }>(
-    `http://localhost:3000/hooks?name=${active?.name as string}`
-  );
+  const relative_path = `/hooks?name=${active?.name as string}`;
+  const url = isEnv().isDevelopment()
+    ? `${process.env.NEXT_PUBLIC_HOST_URL}${relative_path}`
+    : relative_path;
+
+  console.log(url);
+  console.log(process.env);
+
+  const { data, error, loading } = useFetch<{ code: string }>(url);
 
   useEffect(() => {
     if (data?.code) {

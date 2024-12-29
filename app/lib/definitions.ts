@@ -8,12 +8,9 @@ export const HooksSchema = z.object({
 
 // Define a Zod schema for the environment variables
 export const envSchema = z.object({
-  GROQ_API_KEY: isEnv().isDevelopment()
-    ? z.string().min(1, "GROQ_API_KEY is required")
-    : z.string().min(1, "GROQ_API_KEY is required").optional(),
-  SEED_SECRET: isEnv().isDevelopment()
-    ? z.string().min(10, "SEED_SECRET is required")
-    : z.string().min(10, "SEED_SECRET is required").optional(),
+  GROQ_API_KEY: z.string().min(10, "GROQ_API_KEY is required"),
+  SEED_SECRET: z.string().min(10, "SEED_SECRET is required"),
+  HOST_URL: z.string().min(10, "HOST_URL is required"),
 });
 
 // Define the schema for a single Hook
