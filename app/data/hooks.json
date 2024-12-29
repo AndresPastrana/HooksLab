@@ -1,50 +1,34 @@
-[
-  {
-    "name": "useDebounce",
-    "description": "Debounce rapidly changing values"
+{
+  "useDebounce": {
+    "code": "import { useState, useEffect } from 'react';\n\nfunction useDebounce(value, delay) {\n  const [debouncedValue, setDebouncedValue] = useState(value);\n\n  useEffect(() => {\n    const handler = setTimeout(() => {\n      setDebouncedValue(value);\n    }, delay);\n\n    return () => {\n      clearTimeout(handler);\n    };\n  }, [value, delay]);\n\n  return debouncedValue;\n}",
+    "desc": "Debounce rapidly changing values"
   },
-  {
-    "name": "useDidMount",
-    "description": "Call a function after component mounts"
+  "useDidMount": {
+    "code": "import { useEffect } from 'react';\n\nfunction useDidMount(callback) {\n  useEffect(() => {\n    callback();\n  }, []);\n}",
+    "desc": "Call a function after component mounts"
   },
-  {
-    "name": "useIsMounted",
-    "description": "Check if the component is still mounted"
+  "useIsMounted": {
+    "code": "import { useRef, useEffect } from 'react';\n\nfunction useIsMounted() {\n  const isMounted = useRef(false);\n\n  useEffect(() => {\n    isMounted.current = true;\n    return () => {\n      isMounted.current = false;\n    };\n  }, []);\n\n  return isMounted;\n}",
+    "desc": "Check if the component is still mounted"
   },
-  {
-    "name": "useCallback",
-    "description": "Memoize a function to prevent unnecessary re-renders"
+  "usePrevious": {
+    "code": "import { useRef, useEffect } from 'react';\n\nfunction usePrevious(value) {\n  const ref = useRef();\n\n  useEffect(() => {\n    ref.current = value;\n  }, [value]);\n\n  return ref.current;\n}",
+    "desc": "Get the previous value of a prop or state"
   },
-  {
-    "name": "useMemo",
-    "description": "Memoize a value to prevent unnecessary re-renders"
+  "useToggle": {
+    "code": "import { useState } from 'react';\n\nfunction useToggle(initialValue = false) {\n  const [state, setState] = useState(initialValue);\n\n  const toggle = () => setState((prev) => !prev);\n\n  return [state, toggle];\n}",
+    "desc": "Toggle a boolean value"
   },
-  {
-    "name": "useRef",
-    "description": "Create a reference to a DOM node or parent component"
+  "useTimeout": {
+    "code": "import { useEffect, useRef } from 'react';\n\nfunction useTimeout(callback, delay) {\n  const savedCallback = useRef();\n\n  useEffect(() => {\n    savedCallback.current = callback;\n  }, [callback]);\n\n  useEffect(() => {\n    if (delay === null) return;\n\n    const id = setTimeout(() => savedCallback.current(), delay);\n\n    return () => clearTimeout(id);\n  }, [delay]);\n}",
+    "desc": "Run a function after a specified delay"
   },
-  {
-    "name": "useImperativeHandle",
-    "description": "Exposes a value to parent components"
+  "useInterval": {
+    "code": "import { useEffect, useRef } from 'react';\n\nfunction useInterval(callback, delay) {\n  const savedCallback = useRef();\n\n  useEffect(() => {\n    savedCallback.current = callback;\n  }, [callback]);\n\n  useEffect(() => {\n    if (delay === null) return;\n\n    const id = setInterval(() => savedCallback.current(), delay);\n\n    return () => clearInterval(id);\n  }, [delay]);\n}",
+    "desc": "Run a function at specified intervals"
   },
-  {
-    "name": "useLayoutEffect",
-    "description": "Similar to useEffect, but fires after layout changes"
-  },
-  {
-    "name": "useState",
-    "description": "Add state to functional components"
-  },
-  {
-    "name": "useEffect",
-    "description": "Add side-effects to functional components"
-  },
-  {
-    "name": "useContext",
-    "description": "Read context (e.g., theme, data) in functional components"
-  },
-  {
-    "name": "useReducer",
-    "description": "Manage state with a reducer function"
+  "useLocalStorage": {
+    "code": "import { useState } from 'react';\n\nfunction useLocalStorage(key, initialValue) {\n  const [storedValue, setStoredValue] = useState(() => {\n    try {\n      const item = window.localStorage.getItem(key);\n      return item ? JSON.parse(item) : initialValue;\n    } catch (error) {\n      console.error(error);\n      return initialValue;\n    }\n  });\n\n  const setValue = (value) => {\n    try {\n      const valueToStore = value instanceof Function ? value(storedValue) : value;\n      setStoredValue(valueToStore);\n      window.localStorage.setItem(key, JSON.stringify(valueToStore));\n    } catch (error) {\n      console.error(error);\n    }\n  };\n\n  return [storedValue, setValue];\n}",
+    "desc": "Manage state with localStorage persistence"
   }
-]
+}

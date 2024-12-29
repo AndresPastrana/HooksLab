@@ -6,7 +6,7 @@ import Groq from "groq-sdk";
 
 import { loadEnv } from "@lib/env";
 import { validateHooksArray } from "@lib/validations";
-import { Hooks } from "@lib/definitions";
+import { HookDetails } from "@lib/definitions";
 import { isEnv } from "@lib/utils";
 
 export async function GET(req: NextRequest) {
@@ -42,15 +42,24 @@ export async function GET(req: NextRequest) {
   const groq = new Groq({ apiKey: env.GROQ_API_KEY as string });
 
   // Use Groq AI to generate mock hook data
+
+  const json_format_example = `{"useToggle": {
+    "code": "import { useState } from 'react';\n\nfunction useToggle(initialValue = false) {\n  const [state, setState] = useState(initialValue);\n\n  const toggle = () => setState((prev) => !prev);\n\n  return [state, toggle];\n}",
+    "desc": "Toggle a boolean value"
+}, "useDebouncedCallback": {
+    "code": "import { useState } from 'react';\n\nfunction useToggle(initialValue = false) {\n  const [state, setState] = useState(initialValue);\n\n  const toggle = () => setState((prev) => !prev);\n\n  return [state, toggle];\n}",
+    "desc": "Toggle a boolean value"
+}}`;
+  const msg = `Provide a JSON array of custom React hooks. The format should strictly be: ${json_format_example}  . Do not include any additional text, explanations, or headings. Only return the JSON data in the exact format specified.`;
+
   const result = await groq.chat.completions.create({
     messages: [
       {
         role: "user",
-        content:
-          'Provide a JSON array of custom React hooks. The format should strictly be: [{name: "useDebounce", description: "Debounce rapidly changing values"}]. Do not include any additional text, explanations, or headings. Only return the JSON data in the exact format specified.',
+        content: "",
       },
     ],
-    model: "llama3-8b-8192",
+    model: "llama3-70b-8192",
   });
 
   // Extract the generated content
@@ -64,7 +73,7 @@ export async function GET(req: NextRequest) {
   }
 
   // Parse the content to JSON
-  let hooks: Hooks;
+  let hooks: HookDetails;
   try {
     hooks = JSON.parse(content);
   } catch (error) {

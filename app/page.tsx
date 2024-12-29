@@ -49,6 +49,7 @@ export default async function Page({
         {/* Footer */}
         <Footer />
       </div>
+
       <ShowActiveHook />
     </>
   );

@@ -11,22 +11,22 @@ import {
 } from "@ui/shared/card";
 import { Button } from "@ui/shared/button";
 import { ViewCode } from "@/app/ui/home/ViewCode";
-import { Hook } from "@lib/definitions";
+import { HookDetails } from "@lib/definitions";
 
-const ResultItem = ({ hook }: { hook: Hook }) => {
+const ResultItem = ({ hook }: { hook: HookDetails }) => {
+  const name = Object.keys(hook)[0];
+  const { desc, code } = hook[name];
   return (
     <Card
-      key={hook.name + hook.description}
+      key={name + desc}
       className="bg-blue-900/30 border-blue-800 hover:border-teal-400 transition-colors duration-300"
     >
       <CardHeader>
-        <CardTitle className="text-teal-400">{hook.name}</CardTitle>
-        <CardDescription className="text-blue-300">
-          {hook.description}
-        </CardDescription>
+        <CardTitle className="text-teal-400">{name}</CardTitle>
+        <CardDescription className="text-blue-300">{desc}</CardDescription>
       </CardHeader>
       <CardContent className="flex justify-between items-center">
-        <ViewCode name={hook.name} desc={hook.description} />
+        <ViewCode name={name} desc={desc} code={code} />
         <div className="flex space-x-2">
           <Button
             variant="ghost"
