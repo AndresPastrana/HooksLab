@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import { Star, GitFork } from "lucide-react";
+import { Star } from "lucide-react";
 
 import { loadHooks } from "@lib/data";
 import {
@@ -12,6 +12,7 @@ import {
 import { Button } from "@ui/shared/button";
 import { ViewCode } from "@/app/ui/home/ViewCode";
 import { HookDetails } from "@lib/definitions";
+import Share from "./Share";
 
 const ResultItem = ({ hook }: { hook: HookDetails }) => {
   const name = Object.keys(hook)[0];
@@ -40,7 +41,8 @@ const ResultItem = ({ hook }: { hook: HookDetails }) => {
             size="icon"
             className="text-green-400 hover:text-green-300 hover:bg-green-900/50"
           >
-            <GitFork className="h-4 w-4" />
+            {/* Share */}
+            <Share name={name} />
           </Button>
         </div>
       </CardContent>

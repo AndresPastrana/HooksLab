@@ -3,14 +3,21 @@ import path from "path";
 import { readFile } from "fs/promises";
 import { HookDetails } from "@lib/definitions";
 
+// Get a per-page and the page
 export async function loadHooks(term: string = "") {
   try {
     const DATA_PATH = path.join(process.cwd(), "app/data/hooks.json");
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // Remove this
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     // Read the hooks json file and
     const result = await readFile(DATA_PATH, { encoding: "utf-8" });
     const parsedResults: HookDetails = JSON.parse(result);
+    if (term === "") {
+      return Object.keys(parsedResults).map((name) => {
+        return { [name]: parsedResults[name] };
+      });
+    }
 
     // RegExp search term
     const searchRegExp = new RegExp(term, "i");
